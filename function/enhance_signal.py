@@ -46,19 +46,20 @@ def denoise_signal(signal):
     :param signal: 原始信号
     :return: 降噪后的信号
     """
-    slice_signal = signal[:, :1000]  # 对python内array数据类型有效
-    # slice_signal = signal[:1000]  # 对matlab内double数据类型有效
+    slice_signal = signal[:, :1000]
     enhance_signal = np.concatenate([slice_signal, slice_signal, slice_signal, slice_signal, signal], axis=1)
     np.savetxt('enhance_signal.csv', enhance_signal, delimiter=',')
-    function = matlab.engine.start_matlab()
-    data = function.csvread('enhance_signal.csv')
-    function_2 = matlab.engine.start_matlab()
+    function = matlab.engine.start_matlab(async=True)
+    data = function.result()
+    data = data.csvread('enhance_signal.csv')
+    function_2 = matlab.engine.start_matlab(async=True)
+    a = function_2.result()
     fs = 10000
     IS = 0.7
-    result = function_2.WienerScalart96(data, fs, IS)  # 此处不能输入数字，否则会报错
-    number = len(result) - signal.shape[1]  # 对python内signal（array数据类型）有效
-    # number = len(result) - signal.size[1] # 针对matlab的signal（matlab。mlarray.double）有效
-    # matlab内的调用是size(signal)
+    result = a.WienerScalart96(data, fs, IS)# 此处不能输入数字，否则会报错
+    number = len(result) - signal.shape[1]
     result = result[number:]
 
     return result
+
+
