@@ -18,6 +18,7 @@ def get_filepath(parent_path, class_number=0):
 
 def load_signal(filepath):
     data = pd.DataFrame(pd.read_table(filepath, skiprows=11, delimiter=',', header=None, dtype='float'))
+    data = data.fillna(0)
     number_data = np.asarray(data)
     [_, c_size] = number_data.shape
     if c_size == 3:

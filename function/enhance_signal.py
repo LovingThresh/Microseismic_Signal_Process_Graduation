@@ -28,8 +28,8 @@ def shift_signal(signal, change_length):
     :param change_length: 信号剪切长度
     :return:
     """
-    section = signal[0:change_length]
-    change_signal = signal[change_length + 1:] + section
+    section = signal[:, :change_length]
+    change_signal = np.concatenate([signal[:, change_length:], section], axis=1)
 
     return change_signal
 
@@ -49,16 +49,19 @@ def denoise_signal(signal):
     slice_signal = signal[:, :1000]  # 对python内array数据类型有效
     # slice_signal = signal[:1000]  # 对matlab内double数据类型有效
     enhance_signal = np.concatenate([slice_signal, slice_signal, slice_signal, slice_signal, signal], axis=1)
-    np.savetxt('enhance_signal.csv', enhance_signal, delimiter=',')
+    np.savetxt(r'I:\PycharmProjects\Microseismic_Signal_Process_Graduation\enhance_signal.csv', enhance_signal, delimiter=',')
     function = matlab.engine.start_matlab()
-    data = function.csvread('enhance_signal.csv')
+    data = function.csvread(r'I:\PycharmProjects\Microseismic_Signal_Process_Graduation\enhance_signal.csv')
+    function.exit()
     function_2 = matlab.engine.start_matlab()
     fs = 10000
     IS = 0.7
     result = function_2.WienerScalart96(data, fs, IS)  # 此处不能输入数字，否则会报错
+    function_2.exit()
     number = len(result) - signal.shape[1]  # 对python内signal（array数据类型）有效
     # number = len(result) - signal.size[1] # 针对matlab的signal（matlab。mlarray.double）有效
     # matlab内的调用是size(signal)
     result = result[number:]
+    result = np.asarray(result)
 
     return result
