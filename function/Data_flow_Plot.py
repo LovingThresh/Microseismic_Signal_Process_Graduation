@@ -4,6 +4,13 @@ from function import enhance_signal
 
 
 def flow_data(raw_data, filename, label):
+    """
+    组合相关函数，实现raw_data到CWT的全流程
+    :param raw_data: 原始数据，from load_signal
+    :param filename: 便于命名，识别文件信息
+    :param label: 标签_Microseism_Demolition
+    :return: 图片
+    """
     filename_0 = 'raw_data' + '_' + filename
     label = label
     function_CWT_p2m(raw_data, filename=filename_0, label=label)  # raw_data -->  CWT图片

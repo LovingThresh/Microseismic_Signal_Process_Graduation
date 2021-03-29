@@ -5,6 +5,12 @@ import shutil
 
 
 def get_filepath(parent_path, class_number=0):  # class_number=1指的是微震
+    """
+    获取父路径的子文件路径
+    :param parent_path: 父路径
+    :param class_number: 文件类别
+    :return: 某一路径下的所有.mwf文件路径列表
+    """
     datafile_name = os.listdir(parent_path)
     datafile_path = os.path.join(parent_path, datafile_name[class_number])
     each_file_names = os.listdir(datafile_path)
@@ -18,6 +24,11 @@ def get_filepath(parent_path, class_number=0):  # class_number=1指的是微震
 
 
 def load_signal(filepath):
+    """
+    加载数据
+    :param filepath: 数据文件路径
+    :return: raw_signal (ndarray)
+    """
     data = pd.DataFrame(pd.read_table(filepath, skiprows=11, delimiter=',', header=None, dtype='float'))
     data = data.fillna(0)
     number_data = np.asarray(data)
@@ -32,6 +43,16 @@ def load_signal(filepath):
 
 def copyfile(data_filename_list, train_dir, validation_dir, test_dir, label='Microseism',
              datafile_path=r'L:\dataset_for_graduation\Microseism'):
+    """
+    复制文件
+    :param data_filename_list: 需要复制的文件名列表
+    :param train_dir: 指定Train文件夹路径
+    :param validation_dir: 指定Validation文件夹路径
+    :param test_dir: 指定Test文件夹路径
+    :param label: 标签
+    :param datafile_path: 数据文件路径，源路径
+    :return: Copy
+    """
     os.chdir(datafile_path)
     fileList = data_filename_list
     length = len(fileList)
@@ -40,12 +61,16 @@ def copyfile(data_filename_list, train_dir, validation_dir, test_dir, label='Mic
     for i in fileList[int(length * 0.7):int(length * 0.9)]:
         shutil.copyfile(i, r'{}/{}/{}'.format(validation_dir, label, i))
     for i in fileList[int(length * 0.9):]:
-        shutil.copyfile(i, r'{}/{}/{}'.format(test_dir, label, i))
+        shutil.copyfile(i, r'{}/{}'.format(test_dir, i))
 
     return 0
 
 
 def creat_train_file():
+    """
+    创建文件夹
+    :return:
+    """
     os.mkdir(r'L:\dataset_for_graduation\Train')
     os.mkdir(r'L:\dataset_for_graduation\Validation')
     os.mkdir(r'L:\dataset_for_graduation\Test')
@@ -56,13 +81,25 @@ def creat_train_file():
 
 
 def file_filter(f, mask):
+    """
+    文件过滤器
+    :param f: 文件
+    :param mask: Mask条件
+    :return: 满足条件的文件
+    """
     if mask in f:
         return True
     else:
         return False
 
 
-def move_to_path(data_path, label='Microseism', datafile_path=r'L:\dataset_for_graduation\Microseism'):
+def move_to_path(data_path, label='Microseism'):
+    """
+    组合copyfile函数与file_filter函数，实现文件移动至指定路径
+    :param data_path: 源文件
+    :param label: 标签
+    :return: Move file
+    """
     file_list = os.listdir(data_path)
     raw_data_list = [raw_data_file for raw_data_file in file_list if file_filter(raw_data_file, 'raw_data')]
     enhance_data_1_list = [enhance_data_1_file
@@ -78,4 +115,4 @@ def move_to_path(data_path, label='Microseism', datafile_path=r'L:\dataset_for_g
         train_dir = r'L:\dataset_for_graduation\Train'
         validation_dir = r'L:\dataset_for_graduation\Validation'
         test_dir = r'L:\dataset_for_graduation\Test'
-        copyfile(each_type_list, train_dir, validation_dir, test_dir, label, datafile_path)
+        copyfile(each_type_list, train_dir, validation_dir, test_dir, label, data_path)
