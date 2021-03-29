@@ -9,7 +9,7 @@ def flow_data(raw_data, filename, label):
     function_CWT_p2m(raw_data, filename=filename_0, label=label)  # raw_data -->  CWT图片
 
     # 接下来flow_enhance_data
-    enhance_signal_1 = enhance_signal.awgn(raw_data, snr=0.1, seed=7)  # （添加噪音）
+    enhance_signal_1 = enhance_signal.awgn(raw_data, snr=0.2, seed=7)  # （添加噪音）
     filename_1 = 'enhance_data_1' + '_' + filename
     function_CWT_p2m(enhance_signal_1, filename=filename_1, label=label)
 
@@ -21,8 +21,10 @@ def flow_data(raw_data, filename, label):
     filename_3 = 'enhance_data_3' + '_' + filename
     function_CWT_p2m(enhance_signal_3, filename=filename_3, label=label)
 
+    '''
     enhance_signal_4 = enhance_signal.denoise_signal(raw_data)  # （降噪信号）
     filename_4 = 'enhance_data_4' + '_' + filename
     function_CWT_p2m(enhance_signal_4, filename=filename_4, label=label)
+    '''
 
     # 至此，数据拓展可以以CWT图片的形式保存在文件夹中

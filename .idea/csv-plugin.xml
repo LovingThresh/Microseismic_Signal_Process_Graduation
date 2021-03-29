@@ -24,6 +24,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\Checkout\test_1.py">
+          <value>
+            <Attribute>
+              <option name="separator" value=":" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\enhance_signal.csv">
           <value>
             <Attribute>
@@ -81,6 +88,13 @@
           </value>
         </entry>
         <entry key="\signal_enhance_data_1_新疆西拓矿业有限公司微震监测工程-2018-10-16-01-53-27-111100-西拓微震_检波器 08.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\signal_filename.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
