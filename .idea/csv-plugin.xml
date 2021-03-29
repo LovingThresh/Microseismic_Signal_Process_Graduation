@@ -31,6 +31,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\callback\Callback.py">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\enhance_signal.csv">
           <value>
             <Attribute>
