@@ -8,7 +8,7 @@ def main():
 
     # creat_train_file() 已经创建
     data_path = r'L:\dataset_for_graduation\Microseism'
-    move_to_path(data_path)
+    move_to_path(data_path, label='Demolition')
 
     return 0
 
