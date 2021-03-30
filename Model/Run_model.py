@@ -8,7 +8,7 @@ def Run_model(model, train_generator, validation_generator, test_generator, call
                   metrics=['acc'])
 
     history = model.fit(train_generator,
-                        epochs=30,
+                        epochs=3,
                         shuffle=True,
                         callbacks=callbacks,
                         validation_data=validation_generator)

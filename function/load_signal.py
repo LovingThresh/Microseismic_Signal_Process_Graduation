@@ -42,7 +42,7 @@ def load_signal(filepath):
 
 
 def copyfile(data_filename_list, train_dir, validation_dir, test_dir, label='Microseism',
-             datafile_path=r'L:\dataset_for_graduation\Microseism'):
+             datafile_path=r'C:\Users\liuye\Desktop\dataset_for_graduation\Microseism'):
     """
     复制文件
     :param data_filename_list: 需要复制的文件名列表
@@ -61,7 +61,7 @@ def copyfile(data_filename_list, train_dir, validation_dir, test_dir, label='Mic
     for i in fileList[int(length * 0.7):int(length * 0.9)]:
         shutil.copyfile(i, r'{}/{}/{}'.format(validation_dir, label, i))
     for i in fileList[int(length * 0.9):]:
-        shutil.copyfile(i, r'{}/{}'.format(test_dir, i))
+        shutil.copyfile(i, r'{}/{}/{}'.format(test_dir, label, i))
 
     return 0
 
@@ -112,7 +112,7 @@ def move_to_path(data_path, label='Microseism'):
                            for enhance_data_4_file in file_list if file_filter(enhance_data_4_file, 'enhance_data_4')]
     for each_type_list in [raw_data_list, enhance_data_1_list, enhance_data_2_list, enhance_data_3_list,
                            enhance_data_4_list]:
-        train_dir = r'L:\dataset_for_graduation\Train'
-        validation_dir = r'L:\dataset_for_graduation\Validation'
-        test_dir = r'L:\dataset_for_graduation\Test'
+        train_dir = r'C:\Users\liuye\Desktop\dataset_for_graduation\Train'
+        validation_dir = r'C:\Users\liuye\Desktop\dataset_for_graduation\Validation'
+        test_dir = r'C:\Users\liuye\Desktop\dataset_for_graduation\Test'
         copyfile(each_type_list, train_dir, validation_dir, test_dir, label, data_path)

@@ -10,18 +10,18 @@ class ResnetBlock(Model):
         super(ResnetBlock, self).__init__()
         self.filters = filters
         self.strides = strides
-        self.residual_path = False
+        self.residual_path = residual_path
 
         self.c1 = Conv2D(filters, (3, 3), strides=strides, padding='same', use_bias=False)
         self.b1 = BatchNormalization()
         self.a1 = Activation('relu')
 
-        self.c2 = Conv2D(filters, (3, 3), strides=strides, padding='same', use_bias=False)
+        self.c2 = Conv2D(filters, (3, 3), strides=1, padding='same', use_bias=False)
         self.b2 = BatchNormalization()
 
         # 接入Residual_Path
         if residual_path:
-            self.down_c1 = Conv2D(filters, (3, 3), strides=strides, padding='same', use_bias=False)
+            self.down_c1 = Conv2D(filters, (1, 1), strides=strides, padding='same', use_bias=False)
             self.down_b1 = BatchNormalization()
 
         self.a2 = Activation('relu')
@@ -48,8 +48,8 @@ class ResnetBlock(Model):
 class ResNet18(Model):
     def __init__(self, block_list, initial_filters=64):
         super(ResNet18, self).__init__()
-        self.num_block = len(block_list)
-        self.block = block_list
+        self.num_blocks = len(block_list)
+        self.block_list = block_list
         self.out_filters = initial_filters
         self.c1 = Conv2D(self.out_filters, (3, 3), strides=1, padding='same', use_bias=False)
         self.b1 = BatchNormalization()
@@ -68,6 +68,7 @@ class ResNet18(Model):
             self.out_filters *= 2  # 下一个block的卷积核数是上一个block的2倍
         self.p1 = tf.keras.layers.GlobalAveragePooling2D()
         self.f1 = Flatten()
+        self.d = Dense(128, activation='relu')
         self.d1 = Dense(1, activation='sigmoid', kernel_regularizer=tf.keras.regularizers.l2())
 
     def call(self, inputs, mask=None):
@@ -79,8 +80,11 @@ class ResNet18(Model):
 
         x = self.p1(x)
         x = self.f1(x)
-        x = self.d1(x)
+        x = self.d(x)
+        y = self.d1(x)
 
-        return x
+        return y
+
+
 
 
