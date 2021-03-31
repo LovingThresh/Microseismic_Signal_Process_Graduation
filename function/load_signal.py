@@ -41,8 +41,8 @@ def load_signal(filepath):
     return data
 
 
-def copyfile(data_filename_list, train_dir, validation_dir, test_dir, label='Microseism',
-             datafile_path=r'C:\Users\liuye\Desktop\dataset_for_graduation\Microseism'):
+def copyfile(data_filename_list, train_dir, validation_dir, test_dir, label='Demolition',
+             datafile_path=r'C:\Users\liuye\Desktop\dataset_for_graduation\Demolition'):
     """
     复制文件
     :param data_filename_list: 需要复制的文件名列表
@@ -93,7 +93,7 @@ def file_filter(f, mask):
         return False
 
 
-def move_to_path(data_path, label='Microseism'):
+def move_to_path(data_path, label='Demolition'):
     """
     组合copyfile函数与file_filter函数，实现文件移动至指定路径
     :param data_path: 源文件

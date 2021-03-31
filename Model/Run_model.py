@@ -8,7 +8,7 @@ def Run_model(model, train_generator, validation_generator, test_generator, call
                   metrics=['acc'])
 
     history = model.fit(train_generator,
-                        epochs=3,
+                        epochs=30,
                         shuffle=True,
                         callbacks=callbacks,
                         validation_data=validation_generator)
@@ -16,5 +16,5 @@ def Run_model(model, train_generator, validation_generator, test_generator, call
     plot(history)
 
     # 测试集结果
-    loss, accuracy = model.evaluate(test_generator, bathsize=10, verbose=1)
-    print('测试集的损失与准确率分别为{}，{}'.format(loss, accuracy))
+    loss, accuracy = model.evaluate(test_generator, batch_size=32, verbose=1)
+    print('测试集的损失与准确率分别为{}，{}'.format(float('%.2f' % loss), float('%.2f' % accuracy)))

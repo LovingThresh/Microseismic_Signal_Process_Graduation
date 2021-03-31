@@ -13,7 +13,9 @@ def set_VGG16_model():
     model = models.Sequential()
     model.add(conv_base)
     model.add(layers.Flatten())
-    model.add(layers.Dense(256, activation='relu'))
+    model.add(layers.Dropout(0.25))
+    model.add(layers.Dense(512, activation='relu'))
+    model.add(layers.Dense(64, activation='relu'))
     model.add(layers.Dense(1, activation='sigmoid'))
 
     # 解冻VGG16卷积的最后几层

@@ -11,7 +11,8 @@ def set_callbacks():
     if not os.path.exists(logdir):
         os.mkdir(logdir)
 
-    output_model_file = os.path.join(logdir, 'ep{epoch:03d}-loss{loss:.3f}-val_loss{val_loss:.3f}.h5')
+    output_model_file = os.path.join(logdir, 'ep{epoch:03d}-loss{loss:.3f}-val_loss{val_loss:.3f}-val_acc{'
+                                             'val_acc:.3f}.h5')
     callbacks = [
         ModelCheckpoint(output_model_file, save_best_only=True, save_freq='epoch'),
         ReduceLROnPlateau(factor=0.5, patience=3),
