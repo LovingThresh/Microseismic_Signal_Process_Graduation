@@ -1,5 +1,5 @@
 import os
-from keras.callbacks import ModelCheckpoint,ReduceLROnPlateau,EarlyStopping
+from keras.callbacks import ModelCheckpoint, ReduceLROnPlateau, EarlyStopping
 
 
 def set_callbacks():
@@ -11,12 +11,10 @@ def set_callbacks():
     if not os.path.exists(logdir):
         os.mkdir(logdir)
 
-    output_model_file = os.path.join(logdir, 'ep{epoch:03d}-loss{loss:.3f}-val_loss{val_loss:.3f}-val_acc{'
-                                             'val_acc:.3f}.h5')
-    callbacks = [
-        ModelCheckpoint(output_model_file, save_best_only=True, save_freq='epoch'),
-        ReduceLROnPlateau(factor=0.5, patience=3),
-        EarlyStopping(min_delta=1e-3, patience=10)
-    ]
+    filepathAcc = os.path.join(logdir, 'ep{epoch:03d}-val_loss{val_loss:.3f}-val_acc{val_acc:.3f}.h5')
+    callbacks = [ModelCheckpoint(filepathAcc, monitor='val_acc', save_best_only=True, save_freq='epoch'),
+                 ReduceLROnPlateau(factor=0.5, patience=10),
+                 EarlyStopping(monitor='val_acc', patience=20, mode='max')
+                 ]
 
     return callbacks, logdir

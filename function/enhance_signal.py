@@ -13,9 +13,9 @@ def awgn(x, snr, seed=7):
     """
     np.random.seed(seed)  # 设置随机种子
     snr = 10 ** (snr / 10.0)
-    x_power = np.sum(x ** 2) / len(x)
+    x_power = np.sum(x ** 2) / x.shape[1]
     n_power = x_power / snr
-    noise = np.random.randn(len(x)) * np.sqrt(n_power)
+    noise = np.random.randn(x.shape[1]) * np.sqrt(n_power)
 
     return x + noise
 
@@ -63,5 +63,6 @@ def denoise_signal(signal):
     # matlab内的调用是size(signal)
     result = result[number:]
     result = np.asarray(result)
+    result = result.T
 
     return result

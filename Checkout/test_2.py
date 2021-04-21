@@ -7,8 +7,8 @@ from function.load_signal import *
 def main():
 
     # creat_train_file() 已经创建
-    data_path = r'C:\Users\liuye\Desktop\dataset_for_graduation\Demolition'
-    move_to_path(data_path, label='Demolition')
+    data_path = r'C:\Users\liuye\Desktop\dataset_for_graduation\Microseism_csv'
+    move_to_path(data_path, label='Microseism')
 
     return 0
 

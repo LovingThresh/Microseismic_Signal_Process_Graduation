@@ -11,19 +11,22 @@ def flow_data(raw_data, filename, label):
     :param label: 标签_Microseism_Demolition
     :return: 图片
     """
+    """
     filename_0 = 'raw_data' + '_' + filename
     label = label
     function_CWT_p2m(raw_data, filename=filename_0, label=label)  # raw_data -->  CWT图片
+    """
 
     # 接下来flow_enhance_data
-    enhance_signal_1 = enhance_signal.awgn(raw_data, snr=0.2, seed=7)  # （添加噪音）
+    enhance_signal_1 = enhance_signal.awgn(raw_data, snr=6, seed=7)  # （添加噪音）
     filename_1 = 'enhance_data_1' + '_' + filename
     function_CWT_p2m(enhance_signal_1, filename=filename_1, label=label)
 
+    """
     enhance_signal_2 = enhance_signal.shift_signal(raw_data, change_length=1000)  # （移位信号）
     filename_2 = 'enhance_data_2' + '_' + filename
     function_CWT_p2m(enhance_signal_2, filename=filename_2, label=label)
-
+    
     enhance_signal_3 = enhance_signal.reversal_signal(raw_data)  # （翻转信号）
     filename_3 = 'enhance_data_3' + '_' + filename
     function_CWT_p2m(enhance_signal_3, filename=filename_3, label=label)
@@ -33,5 +36,5 @@ def flow_data(raw_data, filename, label):
     filename_4 = 'enhance_data_4' + '_' + filename
     function_CWT_p2m(enhance_signal_4, filename=filename_4, label=label)
     '''
-
+    """
     # 至此，数据拓展可以以CWT图片的形式保存在文件夹中

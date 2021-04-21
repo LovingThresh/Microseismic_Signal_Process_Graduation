@@ -52,6 +52,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\Model\ResNet_model18.py">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\Model\Run_model.py">
           <value>
             <Attribute>
@@ -59,7 +66,21 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\Model\VGG16_model.py">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\Model\VGG_model.py">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\Model\my_Model.py">
           <value>
             <Attribute>
               <option name="separator" value="," />
@@ -101,6 +122,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\function\Plot_result.py">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\function\WienerScalart96.m">
           <value>
             <Attribute>
@@ -112,6 +140,20 @@
           <value>
             <Attribute>
               <option name="separator" value=":" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\function\helperCreateRGBfromTFforMicroseism.m">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\function\helperCreateRGBfromTFforMicroseism_2.m">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
             </Attribute>
           </value>
         </entry>

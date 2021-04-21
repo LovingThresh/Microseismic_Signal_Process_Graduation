@@ -1,6 +1,8 @@
 import matplotlib.pyplot as plt
 
 
+plt.switch_backend('TKAgg')
+
 def plot(history):
     """
     打印结果

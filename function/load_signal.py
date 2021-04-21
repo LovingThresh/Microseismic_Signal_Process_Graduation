@@ -41,8 +41,8 @@ def load_signal(filepath):
     return data
 
 
-def copyfile(data_filename_list, train_dir, validation_dir, test_dir, label='Demolition',
-             datafile_path=r'C:\Users\liuye\Desktop\dataset_for_graduation\Demolition'):
+def copyfile(data_filename_list, train_dir, validation_dir, test_dir, label='Microseism',
+             datafile_path=r'C:\Users\liuye\Desktop\dataset_for_graduation\Microseism'):
     """
     复制文件
     :param data_filename_list: 需要复制的文件名列表
@@ -54,7 +54,8 @@ def copyfile(data_filename_list, train_dir, validation_dir, test_dir, label='Dem
     :return: Copy
     """
     os.chdir(datafile_path)
-    fileList = data_filename_list
+    fileList = os.listdir(datafile_path)
+    # fileList = data_filename_list
     length = len(fileList)
     for i in fileList[:int(length * 0.7)]:
         shutil.copyfile(i, r'{}/{}/{}'.format(train_dir, label, i))
@@ -78,6 +79,8 @@ def creat_train_file():
     os.mkdir(r'L:\dataset_for_graduation\Validation\Microseism')
     os.mkdir(r'L:\dataset_for_graduation\Train\Demolition')
     os.mkdir(r'L:\dataset_for_graduation\Validation\Demolition')
+    os.mkdir(r'L:\dataset_for_graduation\Test\Demolition')
+    os.mkdir(r'L:\dataset_for_graduation\Test\Microseism')
 
 
 def file_filter(f, mask):
@@ -112,7 +115,7 @@ def move_to_path(data_path, label='Demolition'):
                            for enhance_data_4_file in file_list if file_filter(enhance_data_4_file, 'enhance_data_4')]
     for each_type_list in [raw_data_list, enhance_data_1_list, enhance_data_2_list, enhance_data_3_list,
                            enhance_data_4_list]:
-        train_dir = r'C:\Users\liuye\Desktop\dataset_for_graduation\Train'
-        validation_dir = r'C:\Users\liuye\Desktop\dataset_for_graduation\Validation'
-        test_dir = r'C:\Users\liuye\Desktop\dataset_for_graduation\Test'
+        train_dir = r'L:\dataset_for_graduation\Train'
+        validation_dir = r'L:\dataset_for_graduation\Validation'
+        test_dir = r'L:\dataset_for_graduation\Test'
         copyfile(each_type_list, train_dir, validation_dir, test_dir, label, data_path)
